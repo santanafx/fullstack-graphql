@@ -6,6 +6,8 @@ const {models, db} = require('./db')
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  introspection: true,  // Enable introspection
+  playground: true, 
   context() {
     const user = db.get('user').value()
     return {models, db, user}

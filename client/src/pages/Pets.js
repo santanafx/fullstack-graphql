@@ -6,6 +6,11 @@ import Loader from '../components/Loader'
 import NewPetModal from '../components/NewPetModal'
 import PetsList from '../components/PetsList'
 
+
+//se eu fizer uma mutation onde ja existe o mesmo node o apollo vai dar update automaticamente no cache.
+
+//ou seja, abaixo tenho uma query que tem sua operacao chamada de AllPets. A query se chama pets. O node tem id,name,type e img
+
 const ALL_PETS = gql`
 query AllPets{
   pets{
@@ -17,6 +22,8 @@ query AllPets{
 }
 `
 
+//a mutation abaixo tem, CreateAPet como nome da operacao. addPet com o nome da mutation e node tem id, name, type e img
+
 const NEW_PET = gql`
 mutation CreateAPet($newPet: NewPetInput!){
   addPet(input: $newPet){
@@ -27,6 +34,8 @@ mutation CreateAPet($newPet: NewPetInput!){
     }
   }
 `
+
+//Se voce quiser atualizar somente o name de pet ainda sim 'e necessario passar id, name, type e img. Caso contrario apollo nao vai atualizar o cache automaticamente. A ordem de id,name,type e img nao importa
 
 export default function Pets () {
   const [modal, setModal] = useState(false)
